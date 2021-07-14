@@ -67,15 +67,15 @@ public class AtlasData extends PersistentState {
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag compound) {
+    public NbtCompound toTag(NbtCompound compound) {
         return writeToNBT(compound, true);
     }
 
-    public CompoundTag writeToNBT(CompoundTag compound, boolean includeTileData) {
-        ListTag dimensionMapList = new ListTag();
+    public NbtCompound writeToNBT(NbtCompound compound, boolean includeTileData) {
+        NbtList dimensionMapList = new NbtList();
         compound.putInt(TAG_VERSION, VERSION);
         for (Entry<RegistryKey<World>, WorldData> dimensionEntry : worldMap.entrySet()) {
-            CompoundTag dimTag = new CompoundTag();
+            NbtCompound dimTag = new NbtCompound();
             dimTag.putString(TAG_WORLD_ID, dimensionEntry.getKey().getValue().toString());
             WorldData dimData = dimensionEntry.getValue();
             if (includeTileData) {
