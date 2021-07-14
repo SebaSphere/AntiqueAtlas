@@ -32,20 +32,22 @@ public class TileDataHandler {
         }
     }
 
+    // TODO: 1.17 | This doesn't work
     /**
      * Loads data for the given atlas or creates a new one.
      */
     public AtlasData getData(int atlasID, World world) {
-        String key = getAtlasDataKey(atlasID);
-
-        if (world.isClient) {
-            // Since atlas data doesn't really belong to a single world-dimension,
-            // it can be cached. This should fix #67
-            return atlasDataClientCache.computeIfAbsent(key, AtlasData::new);
-        } else {
-            PersistentStateManager manager = ((ServerWorld) world).getPersistentStateManager();
-            return manager.getOrCreate(() -> new AtlasData(key), key);
-        }
+//        String key = getAtlasDataKey(atlasID);
+//
+//        if (world.isClient) {
+//            // Since atlas data doesn't really belong to a single world-dimension,
+//            // it can be cached. This should fix #67
+//            return atlasDataClientCache.computeIfAbsent(key, AtlasData::new);
+//        } else {
+//            PersistentStateManager manager = ((ServerWorld) world).getPersistentStateManager();
+//            return manager.getOrCreate(() -> new AtlasData(key), key);
+//        }
+        return null;
     }
 
     private String getAtlasDataKey(int atlasID) {

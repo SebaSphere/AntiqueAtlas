@@ -28,7 +28,7 @@ public class AtlasItem extends Item {
     }
 
     public static int getAtlasID(ItemStack stack) {
-        return stack.getOrCreateTag().getInt("atlasID");
+        return stack.getOrCreateNbt().getInt("atlasID");
     }
 
     @Override

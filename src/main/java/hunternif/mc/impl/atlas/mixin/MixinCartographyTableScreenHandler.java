@@ -22,16 +22,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CartographyTableScreenHandler.class)
 public abstract class MixinCartographyTableScreenHandler extends ScreenHandler {
     @Shadow
-    CraftingResultInventory resultSlot;
+    CraftingResultInventory resultInventory;
 
     protected MixinCartographyTableScreenHandler(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
 
-    @Inject(method = "method_17382", at = @At("HEAD"), cancellable = true)
-    void antiqueatlas_call(ItemStack atlas, ItemStack map, ItemStack result, World world, BlockPos pos, CallbackInfo info) {
+    @Inject(method = "updateResult", at = @At("HEAD"), cancellable = true)
+    void antiqueatlas_call(ItemStack atlas, ItemStack map, ItemStack oldResult, CallbackInfo info) {
         if (atlas.getItem() == AtlasAPI.getAtlasItem() && map.getItem() == Items.FILLED_MAP) {
-            resultSlot.setStack(2, atlas.copy());
+            resultInventory.setStack(2, atlas.copy());
 
             this.sendContentUpdates();
 

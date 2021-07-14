@@ -31,15 +31,17 @@ public class MarkersDataHandler {
 	
 	/** Loads data for the given atlas ID or creates a new one. */
 	public MarkersData getMarkersData(int atlasID, World world) {
-		String key = getMarkersDataKey(atlasID);
-		if (world.isClient) {
-			// Since atlas data doesn't really belong to a single world-dimension,
-			// it can be cached. This should fix #67
-			return markersDataClientCache.computeIfAbsent(key, MarkersData::new);
-		} else {
-			PersistentStateManager manager = ((ServerWorld) world).getPersistentStateManager();
-			return manager.getOrCreate(() -> new MarkersData(key), key);
-		}
+		// TODO: 1.17 | This doesn't work
+//		String key = getMarkersDataKey(atlasID);
+//		if (world.isClient) {
+//			// Since atlas data doesn't really belong to a single world-dimension,
+//			// it can be cached. This should fix #67
+//			return markersDataClientCache.computeIfAbsent(key, MarkersData::new);
+//		} else {
+//			PersistentStateManager manager = ((ServerWorld) world).getPersistentStateManager();
+//			return manager.getOrCreate(() -> new MarkersData(key), key);
+//		}
+		return null;
 	}
 	
 	private String getMarkersDataKey(int atlasID) {

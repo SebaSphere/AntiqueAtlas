@@ -28,15 +28,14 @@ public class TileDataStorage extends PersistentState {
     private static final String TAG_VERSION = "aaVersion";
     private static final String TAG_TILE_LIST = "tiles";
 
-//    public TileDataStorage(String key) {
+    public TileDataStorage(String key) {
 //        super(key);
-//    }
+    }
 
     private final Map<ChunkPos, Identifier> tiles = new ConcurrentHashMap<>(2, 0.75f, 2);
 
 
 
--
     public void fromTag(NbtCompound compound) {
         int version = compound.getInt(TAG_VERSION);
 

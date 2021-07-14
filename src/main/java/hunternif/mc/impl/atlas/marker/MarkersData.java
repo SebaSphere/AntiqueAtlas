@@ -123,7 +123,7 @@ public class MarkersData extends PersistentState {
 	}
 
 	@Override
-	public NbtCompound toTag(NbtCompound compound) {
+	public NbtCompound writeNbt(NbtCompound compound) {
 		Log.info("Saving local markers data to NBT");
 		compound.putInt(TAG_VERSION, VERSION);
 		NbtList dimensionMapList = new NbtList();

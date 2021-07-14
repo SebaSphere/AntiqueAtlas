@@ -778,9 +778,9 @@ public class GuiAtlas extends GuiComponent {
         super.renderBackground(matrices);
 
         RenderSystem.setShaderColor(1, 1, 1, 1);
-//        RenderSystem.enableAlphaTest(); // TODO: figure out what this does and alternative
+//        RenderSystem.enableAlphaTest(); // TODO: 1.17 | figure out what this does and alternative
         RenderSystem.blendFunc(GL11.GL_GREATER, 0); // So light detail on tiles is visible
-        // TODO: ^ it was "RenderSystem.alphaFunc(GL11.GL_GREATER, 0);" before. Dunno if this works lmao
+        // TODO: 1.17 |  ^ it was "RenderSystem.alphaFunc(GL11.GL_GREATER, 0);" before. Dunno if this works lmao
         Textures.BOOK.draw(matrices, getGuiX(), getGuiY());
 
         if ((stack == null && AntiqueAtlasMod.CONFIG.itemNeeded) || biomeData == null)

@@ -43,7 +43,12 @@ public class AtlasData extends PersistentState {
      */
     private final Set<PlayerEntity> playersSentTo = new HashSet<>();
 
+    // TODO: 1.17 | This class doesn't work anymore
+    public AtlasData(String key) {
+//        super(key);
+    }
 
+//    @Override
     public void fromTag(NbtCompound compound) {
         int version = compound.getInt(TAG_VERSION);
         if (version < VERSION) {
@@ -67,7 +72,7 @@ public class AtlasData extends PersistentState {
     }
 
     @Override
-    public NbtCompound toTag(NbtCompound compound) {
+    public NbtCompound writeNbt(NbtCompound compound) {
         return writeToNBT(compound, true);
     }
 

@@ -43,7 +43,7 @@ public class GuiArrowButton extends GuiComponentButton {
         return new GuiArrowButton(ArrowDirection.RIGHT);
     }
 
-    // TODO: Fix commented areas
+    // TODO: 1.17| Fix commented areas
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float partialTick) {
         RenderSystem.enableBlend();

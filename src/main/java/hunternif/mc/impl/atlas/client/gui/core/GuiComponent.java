@@ -1,5 +1,6 @@
 package hunternif.mc.impl.atlas.client.gui.core;
 
+import hunternif.mc.impl.atlas.AntiqueAtlasMod;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -244,7 +245,10 @@ public class GuiComponent extends Screen {
         child.parent = this;
         child.setGuiCoords(guiX, guiY);
         if (MinecraftClient.getInstance() != null) {
-            child.buttons.clear();
+//            child.buttons.clear();
+            child.getChildren().clear();
+            // TODO: 1.17 | Not sure if this works. Logging if I forget to remove and works
+            AntiqueAtlasMod.LOG.info("REPORT ME WITH THE EXACT MESSAGE!! I shouldn't be in console");
             child.init(MinecraftClient.getInstance(), width, height);
         }
         invalidateSize();
@@ -453,11 +457,19 @@ public class GuiComponent extends Screen {
         }
     }
 
+//    @Override
+//    public void init(MinecraftClient mc, int width, int height) {
+//        super.init(mc, width, height);
+//        for (GuiComponent child : children) {
+//            child.init(mc, width, height);
+//        }
+//    }
+
     @Override
-    public void init(MinecraftClient mc, int width, int height) {
-        super.init(mc, width, height);
+    protected void init() {
+        super.init();
         for (GuiComponent child : children) {
-            child.init(mc, width, height);
+            child.init(MinecraftClient.getInstance(), width, height);
         }
     }
 
@@ -626,7 +638,10 @@ public class GuiComponent extends Screen {
         if (parent != null) {
             parent.removeChild(this); // This sets parent to null
         } else {
-            MinecraftClient.getInstance().openScreen(null);
+
+            // MinecraftClient.getInstance().openScreen(null);
+            // TODO: 1.17 | Dunno if this works but prob
+            MinecraftClient.getInstance().setScreen(null);
         }
     }
 

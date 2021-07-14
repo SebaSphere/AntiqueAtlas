@@ -45,9 +45,16 @@ public class GuiViewport extends GuiComponent {
         content.removeAllChildren();
     }
 
+//    @Override
+//    public void init(MinecraftClient client, int w, int h) {
+//        super.init(client, w, h);
+//        screenScale = client.getWindow().getScaleFactor();
+//    }
+
+    // TODO: 1.17| Check if this works
     @Override
-    public void init(MinecraftClient client, int w, int h) {
-        super.init(client, w, h);
+    protected void init() {
+        super.init();
         screenScale = client.getWindow().getScaleFactor();
     }
 

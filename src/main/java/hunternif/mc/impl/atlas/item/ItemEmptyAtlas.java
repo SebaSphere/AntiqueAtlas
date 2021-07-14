@@ -31,7 +31,7 @@ public class ItemEmptyAtlas extends Item {
         int atlasID = AntiqueAtlasMod.getGlobalAtlasData(world).getNextAtlasId();
         ItemStack atlasStack = new ItemStack(RegistrarAntiqueAtlas.ATLAS);
 
-        atlasStack.getOrCreateTag().putInt("atlasID", atlasID);
+        atlasStack.getOrCreateNbt().putInt("atlasID", atlasID);
 
         AtlasData atlasData = AntiqueAtlasMod.tileData.getData(atlasID, world);
         atlasData.getWorldData(player.getEntityWorld().getRegistryKey()).setBrowsingPositionTo(player);
@@ -44,7 +44,7 @@ public class ItemEmptyAtlas extends Item {
         if (stack.isEmpty()) {
             return new TypedActionResult<>(ActionResult.SUCCESS, atlasStack);
         } else {
-            if (!player.inventory.insertStack(atlasStack.copy())) {
+            if (!player.getInventory().insertStack(atlasStack.copy())) {
                 player.dropItem(atlasStack, true);
             }
 

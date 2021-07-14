@@ -27,13 +27,14 @@ class MixinCartographyTableScreenHandlerResultSlot {
 
     CartographyTableScreenHandler antiqueatlas_handler;
 
-    @Inject(method = "<init>", at = @At("TAIL"))
-    void antiqueatlas_init(CartographyTableScreenHandler handler, Inventory inv, int a, int b, int c, ScreenHandlerContext context, CallbackInfo info) {
-        antiqueatlas_handler = handler;
-    }
+    // TODO: 1.17 | This doesn't init properly
+//    @Inject(method = "<init>", at = @At("TAIL"))
+//    void antiqueatlas_init(CartographyTableScreenHandler handler, Inventory inv, int a, int b, int c, ScreenHandlerContext context, CallbackInfo info) {
+//        antiqueatlas_handler = handler;
+//    }
 
     @Inject(method = "onTakeItem", at = @At("HEAD"))
-    void antiqueatlas_onTakeItem(PlayerEntity player, ItemStack atlas, CallbackInfoReturnable<ItemStack> info) {
+    void antiqueatlas_onTakeItem(PlayerEntity player, ItemStack atlas, CallbackInfo ci) {
         if (atlas.getItem() == AtlasAPI.getAtlasItem()) {
             ItemStack map = antiqueatlas_handler.slots.get(0).getStack();
 

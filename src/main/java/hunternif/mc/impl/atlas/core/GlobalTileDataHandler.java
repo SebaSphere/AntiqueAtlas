@@ -21,12 +21,13 @@ public class GlobalTileDataHandler {
     private final Map<RegistryKey<World>, TileDataStorage> worldData =
             new ConcurrentHashMap<>(2, 0.75f, 2);
 
+    // TODO: 1.17 | This doesn't work
     public void onWorldLoad(MinecraftServer server, ServerWorld world) {
-        worldData.put(world.getRegistryKey(), world.getPersistentStateManager().getOrCreate(() -> {
-            TileDataStorage data = new TileDataStorage(DATA_KEY);
-            data.markDirty();
-            return data;
-        }, DATA_KEY));
+//        worldData.put(world.getRegistryKey(), world.getPersistentStateManager().getOrCreate(() -> {
+//            TileDataStorage data = new TileDataStorage(DATA_KEY);
+//            data.markDirty();
+//            return data;
+//        }, DATA_KEY));
     }
 
     public TileDataStorage getData(World world) {

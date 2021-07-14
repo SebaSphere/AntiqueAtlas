@@ -48,8 +48,8 @@ public class AntiqueAtlasMod implements ModInitializer {
 			LOG.warn("Tried to access server only data from client.");
 			return null;
 		}
-
-		return ((ServerWorld) world).getPersistentStateManager().getOrCreate(() -> new GlobalAtlasData("antiqueatlas:global_atlas_data"), "antiqueatlas:global_atlas_data");
+		return null; // TODO: 1.17 | the below part doesn't work (what it was before)
+//		return ((ServerWorld) world).getPersistentStateManager().getOrCreate(() -> new GlobalAtlasData("antiqueatlas:global_atlas_data"), "antiqueatlas:global_atlas_data");
 	}
 
 	@Override

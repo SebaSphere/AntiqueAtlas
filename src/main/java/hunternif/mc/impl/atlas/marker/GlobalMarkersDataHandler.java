@@ -24,13 +24,14 @@ public class GlobalMarkersDataHandler {
 	private GlobalMarkersData data;
 
 	public void onWorldLoad(MinecraftServer server, ServerWorld world) {
-		if (world.getRegistryKey() == World.OVERWORLD) {
-			data = world.getPersistentStateManager().getOrCreate(() -> {
-				GlobalMarkersData data = new GlobalMarkersData(DATA_KEY);
-				data.markDirty();
-				return data;
-			}, DATA_KEY);
-		}
+		// TODO: 1.17 | This doesn't work
+//		if (world.getRegistryKey() == World.OVERWORLD) {
+//			data = world.getPersistentStateManager().getOrCreate(() -> {
+//				GlobalMarkersData data = new GlobalMarkersData(DATA_KEY);
+//				data.markDirty();
+//				return data;
+//			}, DATA_KEY);
+//		}
 	}
 
 	/**
