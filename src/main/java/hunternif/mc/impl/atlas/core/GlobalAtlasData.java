@@ -8,6 +8,7 @@ public class GlobalAtlasData extends PersistentState {
     public static final String TAG_NEXT_ID = "aaNextID";
     private int nextId = 1;
 
+    // TODO: 1.17 | This doesn't work
     public GlobalAtlasData(String key) {
         super();
     }
@@ -25,7 +26,6 @@ public class GlobalAtlasData extends PersistentState {
         compound.putInt(TAG_NEXT_ID, nextId);
         return compound;
     }
-
 
 //
 //    @Override
