@@ -43,21 +43,22 @@ public class GuiArrowButton extends GuiComponentButton {
         return new GuiArrowButton(ArrowDirection.RIGHT);
     }
 
+    // TODO: Fix commented areas
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float partialTick) {
         RenderSystem.enableBlend();
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderSystem.alphaFunc(GL11.GL_GREATER, 0);
+        // RenderSystem.alphaFunc(GL11.GL_GREATER, 0);
 
         int x = getGuiX(), y = getGuiY();
         if (isMouseOver) {
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         } else {
             // Fade out when the mouse is far from them:
             int distanceSq = (mouseX - x - getWidth() / 2) * (mouseX - x - getWidth() / 2) +
                     (mouseY - y - getHeight() / 2) * (mouseY - y - getHeight() / 2);
             double alpha = distanceSq < 400 ? 0.5 : Math.pow((double) distanceSq, -0.28);
-            RenderSystem.color4f(1, 1, 1, (float) alpha);
+             RenderSystem.setShaderColor(1, 1, 1, (float) alpha);
         }
 
         int u = 0, v = 0;

@@ -6,8 +6,7 @@ import hunternif.mc.impl.atlas.network.packet.s2c.play.MarkersS2CPacket;
 import hunternif.mc.impl.atlas.util.Log;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -70,13 +69,8 @@ public class MarkersData extends PersistentState {
 	private final Map<RegistryKey<World>, DimensionMarkersData> worldMap =
 			new ConcurrentHashMap<>(2, 0.75f, 2);
 
-	public MarkersData(String key) {
-		super(key);
-	}
 
-
-	@Override
-	public void fromTag(CompoundTag compound) {
+	public void fromTag(NbtCompound compound) {
 		int version = compound.getInt(TAG_VERSION);
 		if (version < VERSION) {
 			Log.warn("Outdated atlas data format! Was %d but current is %d", version, VERSION);

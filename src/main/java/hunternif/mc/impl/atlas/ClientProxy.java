@@ -68,10 +68,11 @@ public class ClientProxy implements SimpleSynchronousResourceReloadListener {
 	}
 
 	@Override
-	public void apply(ResourceManager var1) {
+	public void reload(ResourceManager manager) {
 		for (MarkerType type : MarkerType.REGISTRY) {
 			type.initMips();
 		}
 		assignBiomeTextures();
 	}
+
 }

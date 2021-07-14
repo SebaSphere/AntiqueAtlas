@@ -20,24 +20,24 @@ public class CartographyTableHooks {
         }
 
         if (map.getItem() == Items.FILLED_MAP) {
-            MapState mapState = FilledMapItem.getMapState(map, player.getEntityWorld());
+            MapState mapState = FilledMapItem.getOrCreateMapState(map, player.getEntityWorld());
             if (mapState != null) {
-                mapState.icons.forEach((key, icon) -> {
+                mapState.getIcons().forEach((key) -> {
                     int i = 1 << mapState.scale;
 
-                    int x = (int) ((int) (icon.getX() - 0.5f) / 2f) * i + mapState.xCenter;
-                    int z = (int) ((int) (icon.getZ() - 0.5f) / 2f) * i + mapState.zCenter;
+                    int x = (int) ((int) (key.getX() - 0.5f) / 2f) * i + mapState.centerX;
+                    int z = (int) ((int) (key.getZ() - 0.5f) / 2f) * i + mapState.centerZ;
 
                     Identifier type = null;
                     Text label = null;
 
-                    if (icon.getType() == MapIcon.Type.RED_X) {
+                    if (key.getType() == MapIcon.Type.RED_X) {
                         type = AntiqueAtlasMod.id("red_x_small");
                         label = new TranslatableText("gui.antiqueatlas.marker.treasure");
-                    } else if (icon.getType() == MapIcon.Type.MONUMENT) {
+                    } else if (key.getType() == MapIcon.Type.MONUMENT) {
                         type = AntiqueAtlasMod.id("monument");
                         label = new TranslatableText("gui.antiqueatlas.marker.monument");
-                    } else if (icon.getType() == MapIcon.Type.MANSION) {
+                    } else if (key.getType() == MapIcon.Type.MANSION) {
                         type = AntiqueAtlasMod.id("mansion");
                         label = new TranslatableText("gui.antiqueatlas.marker.mansion");
                     }

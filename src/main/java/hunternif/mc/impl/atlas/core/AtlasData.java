@@ -4,8 +4,8 @@ import hunternif.mc.impl.atlas.network.packet.s2c.play.MapDataS2CPacket;
 import hunternif.mc.impl.atlas.util.Log;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ChunkPos;
@@ -43,24 +43,20 @@ public class AtlasData extends PersistentState {
      */
     private final Set<PlayerEntity> playersSentTo = new HashSet<>();
 
-    public AtlasData(String key) {
-        super(key);
-    }
 
-    @Override
-    public void fromTag(CompoundTag compound) {
+    public void fromTag(NbtCompound compound) {
         int version = compound.getInt(TAG_VERSION);
         if (version < VERSION) {
             Log.warn("Outdated atlas data format! Was %d but current is %d.", version, VERSION);
             return;
         }
 
-        ListTag worldMapList = compound.getList(TAG_WORLD_MAP_LIST, NbtType.COMPOUND);
+        NbtList worldMapList = compound.getList(TAG_WORLD_MAP_LIST, NbtType.COMPOUND);
         for (int d = 0; d < worldMapList.size(); d++) {
-            CompoundTag worldTag = worldMapList.getCompound(d);
+            NbtCompound worldTag = worldMapList.getCompound(d);
             RegistryKey<World> worldID;
-            worldID = RegistryKey.of(Registry.DIMENSION, new Identifier(worldTag.getString(TAG_WORLD_ID)));
-            ListTag dimensionTag = (ListTag) worldTag.get(TAG_VISITED_CHUNKS);
+            worldID = RegistryKey.of(Registry.WORLD_KEY, new Identifier(worldTag.getString(TAG_WORLD_ID)));
+            NbtList dimensionTag = (NbtList) worldTag.get(TAG_VISITED_CHUNKS);
             WorldData dimData = getWorldData(worldID);
             dimData.readFromNBT(dimensionTag);
             double zoom = worldTag.getDouble(TAG_BROWSING_ZOOM);
@@ -149,7 +145,7 @@ public class AtlasData extends PersistentState {
      * during the first run of ItemAtlas.onUpdate().
      */
     public void syncOnPlayer(int atlasID, PlayerEntity player) {
-        CompoundTag data = new CompoundTag();
+        NbtCompound data = new NbtCompound();
 
         // Before syncing make sure the changes are written to the nbt.
         // Do not include dimension tile data.  This will happen later.
